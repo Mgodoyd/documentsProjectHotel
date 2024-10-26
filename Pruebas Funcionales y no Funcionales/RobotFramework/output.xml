@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0.1 (Python 3.12.4 on win32)" generated="2024-10-24T21:54:01.136383" rpa="false" schemaversion="5">
+<suite id="s1" name="pruebasApi" source="C:\Users\godoy\Desktop\Decimo Semestre\Aseguramiento\Pruebas Finales\RobotFramework\pruebasApi.robot">
+<test id="s1-t1" name="Obtener Token De Sesión" line="14">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:02.398981" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:02.398887" elapsed="0.000094"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:02.399945" level="INFO">${payload} = {'email': 'admin1@miumg.edu.com', 'password': 'Hotel123@'}</msg>
+<var>${payload}</var>
+<arg>email=${USER}</arg>
+<arg>password=${PASSWORD}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:02.399945" elapsed="0.000000"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2024-10-24T21:54:03.932328" level="INFO">POST Request : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/login 
+ path_url=/api/v1/login 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '58'} 
+ body=b'{"email": "admin1@miumg.edu.com", "password": "Hotel123@"}' 
+ </msg>
+<msg time="2024-10-24T21:54:03.932328" level="INFO">POST Response : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/login 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Date': 'Fri, 25 Oct 2024 03:54:04 GMT', 'Cache-Control': 'no-store, must-revalidate, no-cache, max-age=0', 'Expires': '0', 'Pragma': 'no-cache', 'Transfer-Encoding': 'chunked', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'x-ms-middleware-request-id': '00000000-0000-0000-0000-000000000000', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '0', 'X-Frame-Options': 'DENY'} 
+ body={"message":"Success login!","status":"OK","data":{"jwt":"eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODMwMjQ0fQ.MAX5URrBYJ2bmGaXAueaX8sFZJjq5gQfw1sSJYc6_wY","expiration":1799},"errors":null} 
+ </msg>
+<msg time="2024-10-24T21:54:03.932328" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/login</arg>
+<arg>headers=${headers}</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2024-10-24T21:54:02.400942" elapsed="1.531386"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-10-24T21:54:03.934344" level="INFO">Response: {"message":"Success login!","status":"OK","data":{"jwt":"eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODMwMjQ0fQ.MAX5URrBYJ2bmGaXAueaX8sFZJjq5gQfw1sSJYc6_wY","expiration":1799},"errors":null}</msg>
+<arg>Response: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-10-24T21:54:03.933344" elapsed="0.001000"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-10-24T21:54:03.935314" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-10-24T21:54:03.935314" elapsed="0.000000"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-10-24T21:54:03.937306" level="INFO">${token} = eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODM...</msg>
+<var>${token}</var>
+<arg>${response.json()['data']['jwt']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-10-24T21:54:03.936305" elapsed="0.001001"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-10-24T21:54:03.938821" level="INFO">Token generado: eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODMwMjQ0fQ.MAX5URrBYJ2bmGaXAueaX8sFZJjq5gQfw1sSJYc6_wY</msg>
+<arg>Token generado: ${token}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-10-24T21:54:03.937306" elapsed="0.001608"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-10-24T21:54:03.938914" level="INFO">${TOKEN} = eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODM...</msg>
+<arg>${TOKEN}</arg>
+<arg>${token}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-10-24T21:54:03.938914" elapsed="0.000000"/>
+</kw>
+<doc>Iniciar sesión y obtener el token de autenticación</doc>
+<status status="PASS" start="2024-10-24T21:54:02.397336" elapsed="1.542497"/>
+</test>
+<test id="s1-t2" name="Get All Puestos" line="25">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-10-24T21:54:06.942479" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-10-24T21:54:03.940840" elapsed="3.001639"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:06.943463" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyO...</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:06.943463" elapsed="0.000000"/>
+</kw>
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2024-10-24T21:54:07.593740" level="INFO">GET Request : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/puestos 
+ path_url=/api/v1/puestos 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODMwMjQ0fQ.MAX5URrBYJ2bmGaXAueaX8sFZJjq5gQfw1sSJYc6_wY'} 
+ body=None 
+ </msg>
+<msg time="2024-10-24T21:54:07.593740" level="INFO">GET Response : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/puestos 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Date': 'Fri, 25 Oct 2024 03:54:08 GMT', 'Cache-Control': 'no-store, must-revalidate, no-cache, max-age=0', 'Expires': '0', 'Pragma': 'no-cache', 'Transfer-Encoding': 'chunked', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'x-ms-middleware-request-id': '00000000-0000-0000-0000-000000000000', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '0', 'X-Frame-Options': 'DENY'} 
+ body={"message":"Success","status":"OK","data":[{"id":"c72ba3a4-4f05-437c-850f-0f0b3b9bf399","name":"Receptor"},{"id":"5b26c5c4-9e98-4049-bcc5-222ede409496","name":"Botones"},{"id":"7a48eb93-db3b-48c6-846f-296b9ed42e18","name":"Conserje"},{"id":"2025fbcd-4e3d-48ab-aaf4-2f99cd095292","name":"Receptor"},{"id":"ed9de15e-ddd8-4115-9300-31064dafc8f4","name":"Conserje20"},{"id":"e39b8a43-0588-4efc-868c-314e9b44bbd2","name":"Receptor"},{"id":"26d1dde9-e321-4013-b9dc-328dd1c13f42","name":"Conserje25"},{"id":"523803f2-19b4-482a-8f51-47dc1ecd43ba","name":"Conserje2"},{"id":"67dfee70-847a-45e9-9166-4c411a8f76c9","name":"Receptor2"},{"id":"380247f7-a4b8-403f-b3be-4eab5f555842","name":"Secretaria"},{"id":"6b8e98c6-15a9-4ee4-9e7a-6183599f9d04","name":"Conserje22"},{"id":"09879e32-e322-416b-81fa-908e901d6c56","name":"Conserje23"},{"id":"fd38e851-1992-4c11-a499-b7990083fe84","name":"Conserje24"},{"id":"789487f4-83de-40e4-a845-db234776fe13","name":"Conserje21"}],"errors":null} 
+ </msg>
+<msg time="2024-10-24T21:54:07.593740" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/puestos</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2024-10-24T21:54:06.944422" elapsed="0.649318"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-10-24T21:54:07.595743" level="INFO">Response: {"message":"Success","status":"OK","data":[{"id":"c72ba3a4-4f05-437c-850f-0f0b3b9bf399","name":"Receptor"},{"id":"5b26c5c4-9e98-4049-bcc5-222ede409496","name":"Botones"},{"id":"7a48eb93-db3b-48c6-846f-296b9ed42e18","name":"Conserje"},{"id":"2025fbcd-4e3d-48ab-aaf4-2f99cd095292","name":"Receptor"},{"id":"ed9de15e-ddd8-4115-9300-31064dafc8f4","name":"Conserje20"},{"id":"e39b8a43-0588-4efc-868c-314e9b44bbd2","name":"Receptor"},{"id":"26d1dde9-e321-4013-b9dc-328dd1c13f42","name":"Conserje25"},{"id":"523803f2-19b4-482a-8f51-47dc1ecd43ba","name":"Conserje2"},{"id":"67dfee70-847a-45e9-9166-4c411a8f76c9","name":"Receptor2"},{"id":"380247f7-a4b8-403f-b3be-4eab5f555842","name":"Secretaria"},{"id":"6b8e98c6-15a9-4ee4-9e7a-6183599f9d04","name":"Conserje22"},{"id":"09879e32-e322-416b-81fa-908e901d6c56","name":"Conserje23"},{"id":"fd38e851-1992-4c11-a499-b7990083fe84","name":"Conserje24"},{"id":"789487f4-83de-40e4-a845-db234776fe13","name":"Conserje21"}],"errors":null}</msg>
+<arg>Response: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-10-24T21:54:07.594900" elapsed="0.000843"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-10-24T21:54:07.596743" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-10-24T21:54:07.596743" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-10-24T21:54:07.598751" level="INFO">{'message': 'Success', 'status': 'OK', 'data': [{'id': 'c72ba3a4-4f05-437c-850f-0f0b3b9bf399', 'name': 'Receptor'}, {'id': '5b26c5c4-9e98-4049-bcc5-222ede409496', 'name': 'Botones'}, {'id': '7a48eb93-db3b-48c6-846f-296b9ed42e18', 'name': 'Conserje'}, {'id': '2025fbcd-4e3d-48ab-aaf4-2f99cd095292', 'name': 'Receptor'}, {'id': 'ed9de15e-ddd8-4115-9300-31064dafc8f4', 'name': 'Conserje20'}, {'id': 'e39b8a43-0588-4efc-868c-314e9b44bbd2', 'name': 'Receptor'}, {'id': '26d1dde9-e321-4013-b9dc-328dd1c13f42', 'name': 'Conserje25'}, {'id': '523803f2-19b4-482a-8f51-47dc1ecd43ba', 'name': 'Conserje2'}, {'id': '67dfee70-847a-45e9-9166-4c411a8f76c9', 'name': 'Receptor2'}, {'id': '380247f7-a4b8-403f-b3be-4eab5f555842', 'name': 'Secretaria'}, {'id': '6b8e98c6-15a9-4ee4-9e7a-6183599f9d04', 'name': 'Conserje22'}, {'id': '09879e32-e322-416b-81fa-908e901d6c56', 'name': 'Conserje23'}, {'id': 'fd38e851-1992-4c11-a499-b7990083fe84', 'name': 'Conserje24'}, {'id': '789487f4-83de-40e4-a845-db234776fe13', 'name': 'Conserje21'}], 'errors': None}</msg>
+<arg>${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-10-24T21:54:07.597740" elapsed="0.001011"/>
+</kw>
+<doc>Obtener todos los puestos</doc>
+<status status="PASS" start="2024-10-24T21:54:03.940840" elapsed="3.658433"/>
+</test>
+<test id="s1-t3" name="Create A New Puesto" line="34">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-10-24T21:54:10.601417" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-10-24T21:54:07.601321" elapsed="3.000096"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:10.602755" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyO...</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:10.601726" elapsed="0.001029"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:10.603756" level="INFO">${data} = {'name': 'Conserje26'}</msg>
+<var>${data}</var>
+<arg>name=Conserje26</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:10.602755" elapsed="0.001001"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2024-10-24T21:54:11.573597" level="INFO">POST Request : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/puestos 
+ path_url=/api/v1/puestos 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODMwMjQ0fQ.MAX5URrBYJ2bmGaXAueaX8sFZJjq5gQfw1sSJYc6_wY', 'Content-Type': 'application/json', 'Content-Length': '22'} 
+ body=b'{"name": "Conserje26"}' 
+ </msg>
+<msg time="2024-10-24T21:54:11.573597" level="INFO">POST Response : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/puestos 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Date': 'Fri, 25 Oct 2024 03:54:12 GMT', 'Cache-Control': 'no-store, must-revalidate, no-cache, max-age=0', 'Expires': '0', 'Pragma': 'no-cache', 'Transfer-Encoding': 'chunked', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'x-ms-middleware-request-id': '00000000-0000-0000-0000-000000000000', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '0', 'X-Frame-Options': 'DENY'} 
+ body={"message":"Success","status":"OK","data":{"id":"03010248-4ef7-4bec-8f14-da0f3a250322","name":"Conserje26","createdAt":"2024-10-25T03:54:12.274164","updatedAt":"2024-10-25T03:54:12.274741"},"errors":null} 
+ </msg>
+<msg time="2024-10-24T21:54:11.574593" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/puestos</arg>
+<arg>headers=${headers}</arg>
+<arg>json=${data}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2024-10-24T21:54:10.604750" elapsed="0.969843"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-10-24T21:54:11.575589" level="INFO">Response: {"message":"Success","status":"OK","data":{"id":"03010248-4ef7-4bec-8f14-da0f3a250322","name":"Conserje26","createdAt":"2024-10-25T03:54:12.274164","updatedAt":"2024-10-25T03:54:12.274741"},"errors":null}</msg>
+<arg>Response: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-10-24T21:54:11.574593" elapsed="0.001995"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-10-24T21:54:11.577585" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-10-24T21:54:11.576588" elapsed="0.000997"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-10-24T21:54:11.578601" level="INFO">${CREATED_PUEST_ID} = 03010248-4ef7-4bec-8f14-da0f3a250322</msg>
+<var>${CREATED_PUEST_ID}</var>
+<arg>${response.json()['data']['id']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-10-24T21:54:11.578601" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-10-24T21:54:11.579818" level="INFO">ID del puesto creado: 03010248-4ef7-4bec-8f14-da0f3a250322</msg>
+<arg>ID del puesto creado: ${CREATED_PUEST_ID}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-10-24T21:54:11.579818" elapsed="0.000000"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-10-24T21:54:11.579818" level="INFO">${CREATED_PUEST_ID} = 03010248-4ef7-4bec-8f14-da0f3a250322</msg>
+<arg>${CREATED_PUEST_ID}</arg>
+<arg>${CREATED_PUEST_ID}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-10-24T21:54:11.579818" elapsed="0.000000"/>
+</kw>
+<doc>Crear un nuevo puesto y almacenar su ID</doc>
+<status status="PASS" start="2024-10-24T21:54:07.600286" elapsed="3.980531"/>
+</test>
+<test id="s1-t4" name="Update A Puesto" line="47">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-10-24T21:54:14.582277" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-10-24T21:54:11.581816" elapsed="3.000461"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:14.583933" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyO...</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:14.583330" elapsed="0.000603"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:14.584991" level="INFO">${data} = {'id': '03010248-4ef7-4bec-8f14-da0f3a250322', 'name': 'Recepto2'}</msg>
+<var>${data}</var>
+<arg>id=${CREATED_PUEST_ID}</arg>
+<arg>name=Recepto2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:14.584445" elapsed="0.000546"/>
+</kw>
+<kw name="PUT" owner="RequestsLibrary">
+<msg time="2024-10-24T21:54:15.119620" level="INFO">PUT Request : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/puestos 
+ path_url=/api/v1/puestos 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODMwMjQ0fQ.MAX5URrBYJ2bmGaXAueaX8sFZJjq5gQfw1sSJYc6_wY', 'Content-Type': 'application/json', 'Content-Length': '66'} 
+ body=b'{"id": "03010248-4ef7-4bec-8f14-da0f3a250322", "name": "Recepto2"}' 
+ </msg>
+<msg time="2024-10-24T21:54:15.119620" level="INFO">PUT Response : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/puestos 
+ status=403, reason=Forbidden 
+ headers={'Content-Length': '0', 'Date': 'Fri, 25 Oct 2024 03:54:15 GMT', 'Cache-Control': 'no-store, must-revalidate, no-cache, max-age=0', 'Expires': '0', 'Pragma': 'no-cache', 'x-ms-middleware-request-id': '00000000-0000-0000-0000-000000000000', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '0', 'X-Frame-Options': 'DENY'} 
+ body=None 
+ </msg>
+<msg time="2024-10-24T21:54:15.119620" level="FAIL">HTTPError: 403 Client Error: Forbidden for url: https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/puestos</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/puestos</arg>
+<arg>headers=${headers}</arg>
+<arg>json=${data}</arg>
+<doc>Sends a PUT request.</doc>
+<status status="FAIL" start="2024-10-24T21:54:14.585541" elapsed="0.680221">HTTPError: 403 Client Error: Forbidden for url: https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/puestos</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-10-24T21:54:15.266630" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2024-10-24T21:54:15.266630" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-10-24T21:54:15.267655" elapsed="0.000000"/>
+</kw>
+<doc>Actualizar un puesto existente usando el ID del puesto creado</doc>
+<status status="FAIL" start="2024-10-24T21:54:11.580817" elapsed="3.686838">HTTPError: 403 Client Error: Forbidden for url: https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/puestos</status>
+</test>
+<test id="s1-t5" name="Get All Personals" line="57">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-10-24T21:54:18.269208" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-10-24T21:54:15.268652" elapsed="3.000556"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:18.270236" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyO...</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:18.269208" elapsed="0.001028"/>
+</kw>
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2024-10-24T21:54:18.953252" level="INFO">GET Request : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/personals 
+ path_url=/api/v1/personals 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODMwMjQ0fQ.MAX5URrBYJ2bmGaXAueaX8sFZJjq5gQfw1sSJYc6_wY'} 
+ body=None 
+ </msg>
+<msg time="2024-10-24T21:54:18.953252" level="INFO">GET Response : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/personals 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Date': 'Fri, 25 Oct 2024 03:54:19 GMT', 'Cache-Control': 'no-store, must-revalidate, no-cache, max-age=0', 'Expires': '0', 'Pragma': 'no-cache', 'Transfer-Encoding': 'chunked', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'x-ms-middleware-request-id': '00000000-0000-0000-0000-000000000000', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '0', 'X-Frame-Options': 'DENY'} 
+ body={"message":"Success","status":"OK","data":[{"id":"3f330e9a-012c-41d9-8103-3e016f45eab4","rol":{"id":"5b26c5c4-9e98-4049-bcc5-222ede409496","name":"Botones"},"hotel":{"id":"bab38f8a-c8b9-457d-8223-09460687c93f","name":"Hotel UMG"},"name":"Admin910","phone":"12345678","email":"admin31@gmail.com","password":"$2a$10$tPrjfIjX4NnCCTbZm4wOSODevj.soYP5sJwfvLTQ13O3ZsbYTS4qm","address":"villa nueva, Guatemala"},{"id":"d2f6ec83-6988-4bd4-82cf-439e7a6a9a5c","rol":{"id":"380247f7-a4b8-403f-b3be-4eab5f555842","name":"Secretaria"},"hotel":{"id":"bab38f8a-c8b9-457d-8223-09460687c93f","name":"Hotel UMG"},"name":"Admin2","phone":"12345678","email":"admin@miumg.edu.com","password":"$2a$10$COBWp5gqmtcr01p3dIsyJOUqJZnajQ4a7O3aDOBZNfKpcycPX1UK6","address":"villa nueva, Guatemala"},{"id":"d57e1ab7-d137-43b9-b1d5-9f418300da9e","rol":{"id":"5b26c5c4-9e98-4049-bcc5-222ede409496","name":"Botones"},"hotel":{"id":"bab38f8a-c8b9-457d-8223-09460687c93f","name":"Hotel UMG"},"name":"Admin9101","phone":"12345678","email":"admin32@gmail.com","password":"$2a$10$vyGE.bmiFOLI4JAUw8G9Fendx7GoVlDru/lws0Qe1NU4paSR5c5F.","address":"villa nueva, Guatemala"},{"id":"62582094-ceba-4c0f-a35f-b95cdbe37ae6","rol":{"id":"5b26c5c4-9e98-4049-bcc5-222ede409496","name":"Botones"},"hotel":{"id":"bab38f8a-c8b9-457d-8223-09460687c93f","name":"Hotel UMG"},"name":"Admin99","phone":"12345678","email":"admin30@gmail.com","password":"$2a$10$r8v7fN8vfMeQJ9/Q9H4RW.XILKQ6NOosgfFLm7/5m2tQxpnZtfPNC","address":"villa nueva, Guatemala"},{"id":"dd1250a4-6783-4029-9e3e-f176bfca9e20","rol":{"id":"380247f7-a4b8-403f-b3be-4eab5f555842","name":"Secretaria"},"hotel":{"id":"bab38f8a-c8b9-457d-8223-09460687c93f","name":"Hotel UMG"},"name":"Admin2","phone":"12345678","email":"admin1@miumg.edu.com","password":"$2a$10$kQO82klRzTT5r4U6LtAjIuKojHZbTnNe7QBCtXfjJPe43sq9L.R2y","address":"villa nueva, Guatemala"}],"errors":null} 
+ </msg>
+<msg time="2024-10-24T21:54:18.954234" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/personals</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2024-10-24T21:54:18.271245" elapsed="0.682989"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-10-24T21:54:18.955229" level="INFO">Response: {"message":"Success","status":"OK","data":[{"id":"3f330e9a-012c-41d9-8103-3e016f45eab4","rol":{"id":"5b26c5c4-9e98-4049-bcc5-222ede409496","name":"Botones"},"hotel":{"id":"bab38f8a-c8b9-457d-8223-09460687c93f","name":"Hotel UMG"},"name":"Admin910","phone":"12345678","email":"admin31@gmail.com","password":"$2a$10$tPrjfIjX4NnCCTbZm4wOSODevj.soYP5sJwfvLTQ13O3ZsbYTS4qm","address":"villa nueva, Guatemala"},{"id":"d2f6ec83-6988-4bd4-82cf-439e7a6a9a5c","rol":{"id":"380247f7-a4b8-403f-b3be-4eab5f555842","name":"Secretaria"},"hotel":{"id":"bab38f8a-c8b9-457d-8223-09460687c93f","name":"Hotel UMG"},"name":"Admin2","phone":"12345678","email":"admin@miumg.edu.com","password":"$2a$10$COBWp5gqmtcr01p3dIsyJOUqJZnajQ4a7O3aDOBZNfKpcycPX1UK6","address":"villa nueva, Guatemala"},{"id":"d57e1ab7-d137-43b9-b1d5-9f418300da9e","rol":{"id":"5b26c5c4-9e98-4049-bcc5-222ede409496","name":"Botones"},"hotel":{"id":"bab38f8a-c8b9-457d-8223-09460687c93f","name":"Hotel UMG"},"name":"Admin9101","phone":"12345678","email":"admin32@gmail.com","password":"$2a$10$vyGE.bmiFOLI4JAUw8G9Fendx7GoVlDru/lws0Qe1NU4paSR5c5F.","address":"villa nueva, Guatemala"},{"id":"62582094-ceba-4c0f-a35f-b95cdbe37ae6","rol":{"id":"5b26c5c4-9e98-4049-bcc5-222ede409496","name":"Botones"},"hotel":{"id":"bab38f8a-c8b9-457d-8223-09460687c93f","name":"Hotel UMG"},"name":"Admin99","phone":"12345678","email":"admin30@gmail.com","password":"$2a$10$r8v7fN8vfMeQJ9/Q9H4RW.XILKQ6NOosgfFLm7/5m2tQxpnZtfPNC","address":"villa nueva, Guatemala"},{"id":"dd1250a4-6783-4029-9e3e-f176bfca9e20","rol":{"id":"380247f7-a4b8-403f-b3be-4eab5f555842","name":"Secretaria"},"hotel":{"id":"bab38f8a-c8b9-457d-8223-09460687c93f","name":"Hotel UMG"},"name":"Admin2","phone":"12345678","email":"admin1@miumg.edu.com","password":"$2a$10$kQO82klRzTT5r4U6LtAjIuKojHZbTnNe7QBCtXfjJPe43sq9L.R2y","address":"villa nueva, Guatemala"}],"errors":null}</msg>
+<arg>Response: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-10-24T21:54:18.954234" elapsed="0.000995"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-10-24T21:54:18.956228" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-10-24T21:54:18.956228" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-10-24T21:54:18.957228" level="INFO">{'message': 'Success', 'status': 'OK', 'data': [{'id': '3f330e9a-012c-41d9-8103-3e016f45eab4', 'rol': {'id': '5b26c5c4-9e98-4049-bcc5-222ede409496', 'name': 'Botones'}, 'hotel': {'id': 'bab38f8a-c8b9-457d-8223-09460687c93f', 'name': 'Hotel UMG'}, 'name': 'Admin910', 'phone': '12345678', 'email': 'admin31@gmail.com', 'password': '$2a$10$tPrjfIjX4NnCCTbZm4wOSODevj.soYP5sJwfvLTQ13O3ZsbYTS4qm', 'address': 'villa nueva, Guatemala'}, {'id': 'd2f6ec83-6988-4bd4-82cf-439e7a6a9a5c', 'rol': {'id': '380247f7-a4b8-403f-b3be-4eab5f555842', 'name': 'Secretaria'}, 'hotel': {'id': 'bab38f8a-c8b9-457d-8223-09460687c93f', 'name': 'Hotel UMG'}, 'name': 'Admin2', 'phone': '12345678', 'email': 'admin@miumg.edu.com', 'password': '$2a$10$COBWp5gqmtcr01p3dIsyJOUqJZnajQ4a7O3aDOBZNfKpcycPX1UK6', 'address': 'villa nueva, Guatemala'}, {'id': 'd57e1ab7-d137-43b9-b1d5-9f418300da9e', 'rol': {'id': '5b26c5c4-9e98-4049-bcc5-222ede409496', 'name': 'Botones'}, 'hotel': {'id': 'bab38f8a-c8b9-457d-8223-09460687c93f', 'name': 'Hotel UMG'}, 'name': 'Admin9101', 'phone': '12345678', 'email': 'admin32@gmail.com', 'password': '$2a$10$vyGE.bmiFOLI4JAUw8G9Fendx7GoVlDru/lws0Qe1NU4paSR5c5F.', 'address': 'villa nueva, Guatemala'}, {'id': '62582094-ceba-4c0f-a35f-b95cdbe37ae6', 'rol': {'id': '5b26c5c4-9e98-4049-bcc5-222ede409496', 'name': 'Botones'}, 'hotel': {'id': 'bab38f8a-c8b9-457d-8223-09460687c93f', 'name': 'Hotel UMG'}, 'name': 'Admin99', 'phone': '12345678', 'email': 'admin30@gmail.com', 'password': '$2a$10$r8v7fN8vfMeQJ9/Q9H4RW.XILKQ6NOosgfFLm7/5m2tQxpnZtfPNC', 'address': 'villa nueva, Guatemala'}, {'id': 'dd1250a4-6783-4029-9e3e-f176bfca9e20', 'rol': {'id': '380247f7-a4b8-403f-b3be-4eab5f555842', 'name': 'Secretaria'}, 'hotel': {'id': 'bab38f8a-c8b9-457d-8223-09460687c93f', 'name': 'Hotel UMG'}, 'name': 'Admin2', 'phone': '12345678', 'email': 'admin1@miumg.edu.com', 'password': '$2a$10$kQO82klRzTT5r4U6LtAjIuKojHZbTnNe7QBCtXfjJPe43sq9L.R2y', 'address': 'villa nueva, Guatemala'}], 'errors': None}</msg>
+<arg>${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-10-24T21:54:18.957228" elapsed="0.000000"/>
+</kw>
+<doc>Obtener todos los personales</doc>
+<status status="PASS" start="2024-10-24T21:54:15.268652" elapsed="3.688576"/>
+</test>
+<test id="s1-t6" name="Create A New Personal" line="66">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-10-24T21:54:21.960837" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-10-24T21:54:18.959582" elapsed="3.001255"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:21.962267" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyO...</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:21.960837" elapsed="0.001430"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:21.963262" level="INFO">${rol} = {'id': '5b26c5c4-9e98-4049-bcc5-222ede409496'}</msg>
+<var>${rol}</var>
+<arg>id=5b26c5c4-9e98-4049-bcc5-222ede409496</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:21.962267" elapsed="0.000995"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:21.963262" level="INFO">${hotel} = {'id': 'bab38f8a-c8b9-457d-8223-09460687c93f'}</msg>
+<var>${hotel}</var>
+<arg>id=bab38f8a-c8b9-457d-8223-09460687c93f</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:21.963262" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:21.964281" level="INFO">${data} = {'rol': {'id': '5b26c5c4-9e98-4049-bcc5-222ede409496'}, 'hotel': {'id': 'bab38f8a-c8b9-457d-8223-09460687c93f'}, 'name': 'UserTest1', 'phone': '12345678', 'email': 'admin33@gmail.com', 'password': 'ad...</msg>
+<var>${data}</var>
+<arg>rol=${rol}</arg>
+<arg>hotel=${hotel}</arg>
+<arg>name=UserTest1</arg>
+<arg>phone=12345678</arg>
+<arg>email=admin33@gmail.com</arg>
+<arg>password=admin</arg>
+<arg>address=villa nueva, Guatemala</arg>
+<arg>role=EMPLEADO</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:21.964281" elapsed="0.000000"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2024-10-24T21:54:23.241877" level="INFO">POST Request : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/personals 
+ path_url=/api/v1/personals 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODMwMjQ0fQ.MAX5URrBYJ2bmGaXAueaX8sFZJjq5gQfw1sSJYc6_wY', 'Content-Type': 'application/json', 'Content-Length': '262'} 
+ body=b'{"rol": {"id": "5b26c5c4-9e98-4049-bcc5-222ede409496"}, "hotel": {"id": "bab38f8a-c8b9-457d-8223-09460687c93f"}, "name": "UserTest1", "phone": "12345678", "email": "admin33@gmail.com", "password": "admin", "address": "villa nueva, Guatemala", "role": "EMPLEADO"}' 
+ </msg>
+<msg time="2024-10-24T21:54:23.241877" level="INFO">POST Response : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/personals 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Date': 'Fri, 25 Oct 2024 03:54:24 GMT', 'Cache-Control': 'no-store, must-revalidate, no-cache, max-age=0', 'Expires': '0', 'Pragma': 'no-cache', 'Transfer-Encoding': 'chunked', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'x-ms-middleware-request-id': '00000000-0000-0000-0000-000000000000', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '0', 'X-Frame-Options': 'DENY'} 
+ body={"message":"Success","status":"OK","data":{"id":"00bb544b-1e1a-4fd9-9c01-4386907cb7af","rol":{"id":"5b26c5c4-9e98-4049-bcc5-222ede409496"},"hotel":{"id":"bab38f8a-c8b9-457d-8223-09460687c93f"},"name":"UserTest1","phone":"12345678","email":"admin33@gmail.com","password":"$2a$10$DqLOw/lPbch66mtFfPNvku4j9YcOTIO9Zxh9vPx79wFS/lgkvNBxu","address":"villa nueva, Guatemala"},"errors":null} 
+ </msg>
+<msg time="2024-10-24T21:54:23.241877" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/personals</arg>
+<arg>headers=${headers}</arg>
+<arg>json=${data}</arg>
+<doc>Sends a POST request.</doc>
+<status status="PASS" start="2024-10-24T21:54:21.965257" elapsed="1.276620"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-10-24T21:54:23.243878" level="INFO">Response: {"message":"Success","status":"OK","data":{"id":"00bb544b-1e1a-4fd9-9c01-4386907cb7af","rol":{"id":"5b26c5c4-9e98-4049-bcc5-222ede409496"},"hotel":{"id":"bab38f8a-c8b9-457d-8223-09460687c93f"},"name":"UserTest1","phone":"12345678","email":"admin33@gmail.com","password":"$2a$10$DqLOw/lPbch66mtFfPNvku4j9YcOTIO9Zxh9vPx79wFS/lgkvNBxu","address":"villa nueva, Guatemala"},"errors":null}</msg>
+<arg>Response: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-10-24T21:54:23.242883" elapsed="0.000995"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-10-24T21:54:23.244859" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-10-24T21:54:23.243878" elapsed="0.000981"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-10-24T21:54:23.245859" level="INFO">${CREATED_PERSONAL_ID} = 00bb544b-1e1a-4fd9-9c01-4386907cb7af</msg>
+<var>${CREATED_PERSONAL_ID}</var>
+<arg>${response.json()['data']['id']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-10-24T21:54:23.244859" elapsed="0.001000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-10-24T21:54:23.247838" level="INFO">ID del personal creado: 00bb544b-1e1a-4fd9-9c01-4386907cb7af</msg>
+<arg>ID del personal creado: ${CREATED_PERSONAL_ID}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-10-24T21:54:23.246863" elapsed="0.000975"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-10-24T21:54:23.248835" level="INFO">${CREATED_PERSONAL_ID} = 03010248-4ef7-4bec-8f14-da0f3a250322</msg>
+<arg>${CREATED_PERSONAL_ID}</arg>
+<arg>${CREATED_PUEST_ID}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-10-24T21:54:23.247838" elapsed="0.000997"/>
+</kw>
+<doc>Crear un nuevo personal y almacenar su ID</doc>
+<status status="PASS" start="2024-10-24T21:54:18.959582" elapsed="4.289613"/>
+</test>
+<test id="s1-t7" name="Create A New Habitacion" line="81">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-10-24T21:54:26.251314" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-10-24T21:54:23.251222" elapsed="3.000092"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:26.253049" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyO...</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:26.252004" elapsed="0.001045"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:26.254065" level="INFO">${data} = {'name': 'Habitación46', 'tipo': 'Simple', 'precio': '500'}</msg>
+<var>${data}</var>
+<arg>name=Habitación46</arg>
+<arg>tipo=Simple</arg>
+<arg>precio=500</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:26.254065" elapsed="0.000000"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2024-10-24T21:54:26.882234" level="INFO">POST Request : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/habitaciones 
+ path_url=/api/v1/habitaciones 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODMwMjQ0fQ.MAX5URrBYJ2bmGaXAueaX8sFZJjq5gQfw1sSJYc6_wY', 'Content-Type': 'application/json', 'Content-Length': '64'} 
+ body=b'{"name": "Habitaci\\u00f3n46", "tipo": "Simple", "precio": "500"}' 
+ </msg>
+<msg time="2024-10-24T21:54:26.882234" level="INFO">POST Response : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/habitaciones 
+ status=500, reason=Internal Server Error 
+ headers={'Content-Type': 'application/json', 'Date': 'Fri, 25 Oct 2024 03:54:27 GMT', 'Cache-Control': 'no-store, must-revalidate, no-cache, max-age=0', 'Expires': '0', 'Pragma': 'no-cache', 'Transfer-Encoding': 'chunked', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'x-ms-middleware-request-id': '00000000-0000-0000-0000-000000000000', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '0', 'X-Frame-Options': 'DENY'} 
+ body={"message":"Error","status":"INTERNAL_SERVER_ERROR","data":null,"errors":"Cannot invoke \"com.hoteleria.hoteleria.dtos.habitacionDto$hotelDTOW.getId()\" because the return value of \"com.hoteleria.hoteleria.dtos.habitacionDto.getHotel()\" is null"} 
+ </msg>
+<msg time="2024-10-24T21:54:26.883235" level="FAIL">HTTPError: 500 Server Error: Internal Server Error for url: https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/habitaciones</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/habitaciones</arg>
+<arg>headers=${headers}</arg>
+<arg>json=${data}</arg>
+<doc>Sends a POST request.</doc>
+<status status="FAIL" start="2024-10-24T21:54:26.254065" elapsed="0.630164">HTTPError: 500 Server Error: Internal Server Error for url: https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/habitaciones</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-10-24T21:54:26.885229" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2024-10-24T21:54:26.885229" elapsed="0.000998"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-10-24T21:54:26.886227" elapsed="0.000000"/>
+</kw>
+<doc>Crear una nueva habitación</doc>
+<status status="FAIL" start="2024-10-24T21:54:23.250220" elapsed="3.637015">HTTPError: 500 Server Error: Internal Server Error for url: https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/habitaciones</status>
+</test>
+<test id="s1-t8" name="Create A New Cliente" line="91">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-10-24T21:54:29.889228" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-10-24T21:54:26.888752" elapsed="3.000476"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:29.890239" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyO...</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:29.889228" elapsed="0.001011"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:29.891242" level="INFO">${data} = {'role': 'CLIENT', 'nombre': 'Carlos Sanchez', 'nit': '123468870', 'telefono': '12345678', 'email': 'test75@gmail.com', 'direccion': 'zona 3 Villa Nueva'}</msg>
+<var>${data}</var>
+<arg>role=CLIENT</arg>
+<arg>nombre=Carlos Sanchez</arg>
+<arg>nit=123468870</arg>
+<arg>telefono=12345678</arg>
+<arg>email=test75@gmail.com</arg>
+<arg>direccion=zona 3 Villa Nueva</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:29.891242" elapsed="0.000000"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2024-10-24T21:54:30.498021" level="INFO">POST Request : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/clientes 
+ path_url=/api/v1/clientes 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODMwMjQ0fQ.MAX5URrBYJ2bmGaXAueaX8sFZJjq5gQfw1sSJYc6_wY', 'Content-Type': 'application/json', 'Content-Length': '154'} 
+ body=b'{"role": "CLIENT", "nombre": "Carlos Sanchez", "nit": "123468870", "telefono": "12345678", "email": "test75@gmail.com", "direccion": "zona 3 Villa Nueva"}' 
+ </msg>
+<msg time="2024-10-24T21:54:30.498021" level="INFO">POST Response : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/clientes 
+ status=400, reason=Bad Request 
+ headers={'Content-Type': 'application/json', 'Date': 'Fri, 25 Oct 2024 03:54:31 GMT', 'Cache-Control': 'no-store, must-revalidate, no-cache, max-age=0', 'Expires': '0', 'Pragma': 'no-cache', 'Transfer-Encoding': 'chunked', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'x-ms-middleware-request-id': '00000000-0000-0000-0000-000000000000', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '0', 'X-Frame-Options': 'DENY'} 
+ body={"message":"Error","status":"BAD_REQUEST","data":null,"errors":"Cliente already exists"} 
+ </msg>
+<msg time="2024-10-24T21:54:30.498601" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/clientes</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/clientes</arg>
+<arg>headers=${headers}</arg>
+<arg>json=${data}</arg>
+<doc>Sends a POST request.</doc>
+<status status="FAIL" start="2024-10-24T21:54:29.892244" elapsed="0.606893">HTTPError: 400 Client Error: Bad Request for url: https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/clientes</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-10-24T21:54:30.499671" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2024-10-24T21:54:30.500216" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-10-24T21:54:30.500216" elapsed="0.000000"/>
+</kw>
+<doc>Crear un nuevo cliente</doc>
+<status status="FAIL" start="2024-10-24T21:54:26.887235" elapsed="3.613516">HTTPError: 400 Client Error: Bad Request for url: https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/clientes</status>
+</test>
+<test id="s1-t9" name="Create A New Reservacion" line="101">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-10-24T21:54:33.502655" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-10-24T21:54:30.502321" elapsed="3.000334"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:33.504682" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyO...</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:33.503675" elapsed="0.001007"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:33.505672" level="INFO">${cliente} = {'id': '6cc0dffa-a976-40f3-86b1-8798667c7a9d'}</msg>
+<var>${cliente}</var>
+<arg>id=6cc0dffa-a976-40f3-86b1-8798667c7a9d</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:33.504682" elapsed="0.000990"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:33.505672" level="INFO">${habitacion} = {'id': '4f581444-2474-4847-926d-253c8e289e51'}</msg>
+<var>${habitacion}</var>
+<arg>id=4f581444-2474-4847-926d-253c8e289e51</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:33.505672" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:33.506671" level="INFO">${data} = {'cliente': {'id': '6cc0dffa-a976-40f3-86b1-8798667c7a9d'}, 'habitacion': {'id': '4f581444-2474-4847-926d-253c8e289e51'}, 'fecha_entrada': '2024-10-10T13:23:24', 'fecha_salida': '2024-10-15T15:00:00',...</msg>
+<var>${data}</var>
+<arg>cliente=${cliente}</arg>
+<arg>habitacion=${habitacion}</arg>
+<arg>fecha_entrada=2024-10-10T13:23:24</arg>
+<arg>fecha_salida=2024-10-15T15:00:00</arg>
+<arg>estado=reservado</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:33.506671" elapsed="0.000000"/>
+</kw>
+<kw name="POST" owner="RequestsLibrary">
+<msg time="2024-10-24T21:54:34.317413" level="INFO">POST Request : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/reservaciones 
+ path_url=/api/v1/reservaciones 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODMwMjQ0fQ.MAX5URrBYJ2bmGaXAueaX8sFZJjq5gQfw1sSJYc6_wY', 'Content-Type': 'application/json', 'Content-Length': '223'} 
+ body=b'{"cliente": {"id": "6cc0dffa-a976-40f3-86b1-8798667c7a9d"}, "habitacion": {"id": "4f581444-2474-4847-926d-253c8e289e51"}, "fecha_entrada": "2024-10-10T13:23:24", "fecha_salida": "2024-10-15T15:00:00", "estado": "reservado"}' 
+ </msg>
+<msg time="2024-10-24T21:54:34.319051" level="INFO">POST Response : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/reservaciones 
+ status=500, reason=Internal Server Error 
+ headers={'Content-Type': 'application/json', 'Date': 'Fri, 25 Oct 2024 03:54:35 GMT', 'Cache-Control': 'no-store, must-revalidate, no-cache, max-age=0', 'Expires': '0', 'Pragma': 'no-cache', 'Transfer-Encoding': 'chunked', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'x-ms-middleware-request-id': '00000000-0000-0000-0000-000000000000', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '0', 'X-Frame-Options': 'DENY'} 
+ body={"message":"Error","status":"INTERNAL_SERVER_ERROR","data":null,"errors":"could not execute statement [The INSERT statement conflicted with the FOREIGN KEY constraint \"FKr525us8m55vwyr1g7hjbxtduc\". The conflict occurred in database \"DBHotel\", table \"dbo.habitacion\", column 'id'.] [insert into reservacion (id_cliente,created_at,estado,fecha_entrada,fecha_reservacion,fecha_salida,id_habitacion,updated_at,id) values (?,?,?,?,?,?,?,?,?)]; SQL [insert into reservacion (id_cliente,created_at,estado,fecha_entrada,fecha_reservacion,fecha_salida,id_habitacion,updated_at,id) values (?,?,?,?,?,?,?,?,?)]; constraint [null]"} 
+ </msg>
+<msg time="2024-10-24T21:54:34.319051" level="FAIL">HTTPError: 500 Server Error: Internal Server Error for url: https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/reservaciones</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/reservaciones</arg>
+<arg>headers=${headers}</arg>
+<arg>json=${data}</arg>
+<doc>Sends a POST request.</doc>
+<status status="FAIL" start="2024-10-24T21:54:33.506671" elapsed="0.813353">HTTPError: 500 Server Error: Internal Server Error for url: https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/reservaciones</status>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Response: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-10-24T21:54:34.321019" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2024-10-24T21:54:34.321019" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-10-24T21:54:34.322036" elapsed="0.000000"/>
+</kw>
+<doc>Crear una nueva reservación</doc>
+<status status="FAIL" start="2024-10-24T21:54:30.501290" elapsed="3.821726">HTTPError: 500 Server Error: Internal Server Error for url: https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/reservaciones</status>
+</test>
+<test id="s1-t10" name="Get All Servicios" line="115">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-10-24T21:54:37.325580" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-10-24T21:54:34.324060" elapsed="3.001520"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-24T21:54:37.326593" level="INFO">${headers} = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyO...</msg>
+<var>${headers}</var>
+<arg>Authorization=Bearer ${TOKEN}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-24T21:54:37.325580" elapsed="0.001013"/>
+</kw>
+<kw name="GET" owner="RequestsLibrary">
+<msg time="2024-10-24T21:54:38.202458" level="INFO">GET Request : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/servicios 
+ path_url=/api/v1/servicios 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJuYW1lIjoiQWRtaW4yIiwiaWQiOiJkZDEyNTBhNC02NzgzLTQwMjktOWUzZS1mMTc2YmZjYTllMjAiLCJzdWIiOiJhZG1pbjFAbWl1bWcuZWR1LmNvbSIsImlhdCI6MTcyOTgyODQ0NCwiZXhwIjoxNzI5ODMwMjQ0fQ.MAX5URrBYJ2bmGaXAueaX8sFZJjq5gQfw1sSJYc6_wY', 'Content-Type': 'application/json'} 
+ body=None 
+ </msg>
+<msg time="2024-10-24T21:54:38.202458" level="INFO">GET Response : url=https://hotel-gjayfhhpf9hna4eb.eastus-01.azurewebsites.net/api/v1/servicios 
+ status=200, reason=OK 
+ headers={'Content-Type': 'application/json', 'Date': 'Fri, 25 Oct 2024 03:54:39 GMT', 'Cache-Control': 'no-store, must-revalidate, no-cache, max-age=0', 'Expires': '0', 'Pragma': 'no-cache', 'Transfer-Encoding': 'chunked', 'Vary': 'Origin, Access-Control-Request-Method, Access-Control-Request-Headers', 'x-ms-middleware-request-id': '00000000-0000-0000-0000-000000000000', 'X-Content-Type-Options': 'nosniff', 'X-XSS-Protection': '0', 'X-Frame-Options': 'DENY'} 
+ body={"message":"Success","status":"OK","data":[{"id":"a77bcded-5037-41fb-a4f0-407eefe3dcb2","reservacion":{"id":"307d306d-4eb4-4c21-ad8e-abbf50abb0b3","fecha_reservacion":"2024-10-24T18:40:47.496058"},"nombre":"uuu","descripcion":"okjlkmk","precio":200.0},{"id":"56ae7a57-2276-44d4-8042-6d8518b25266","reservacion":{"id":"8441ccb5-18f5-47f1-99d1-1a802f1d78bb","fecha_reservacion":"2024-10-24T18:40:47.495988"},"nombre":"parqueo","descripcion":"uso de parqueo para un vehiculo","precio":200.0}],"errors":null} 
+ </msg>
+<msg time="2024-10-24T21:54:38.203457" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>${BASE_URL}/servicios</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a GET request.</doc>
+<status status="PASS" start="2024-10-24T21:54:37.326593" elapsed="0.876864"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-10-24T21:54:38.204458" level="INFO">Response: {"message":"Success","status":"OK","data":[{"id":"a77bcded-5037-41fb-a4f0-407eefe3dcb2","reservacion":{"id":"307d306d-4eb4-4c21-ad8e-abbf50abb0b3","fecha_reservacion":"2024-10-24T18:40:47.496058"},"nombre":"uuu","descripcion":"okjlkmk","precio":200.0},{"id":"56ae7a57-2276-44d4-8042-6d8518b25266","reservacion":{"id":"8441ccb5-18f5-47f1-99d1-1a802f1d78bb","fecha_reservacion":"2024-10-24T18:40:47.495988"},"nombre":"parqueo","descripcion":"uso de parqueo para un vehiculo","precio":200.0}],"errors":null}</msg>
+<arg>Response: ${response.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-10-24T21:54:38.203457" elapsed="0.001001"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2024-10-24T21:54:38.206461" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2024-10-24T21:54:38.205458" elapsed="0.001003"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-10-24T21:54:38.207457" level="INFO">{'message': 'Success', 'status': 'OK', 'data': [{'id': 'a77bcded-5037-41fb-a4f0-407eefe3dcb2', 'reservacion': {'id': '307d306d-4eb4-4c21-ad8e-abbf50abb0b3', 'fecha_reservacion': '2024-10-24T18:40:47.496058'}, 'nombre': 'uuu', 'descripcion': 'okjlkmk', 'precio': 200.0}, {'id': '56ae7a57-2276-44d4-8042-6d8518b25266', 'reservacion': {'id': '8441ccb5-18f5-47f1-99d1-1a802f1d78bb', 'fecha_reservacion': '2024-10-24T18:40:47.495988'}, 'nombre': 'parqueo', 'descripcion': 'uso de parqueo para un vehiculo', 'precio': 200.0}], 'errors': None}</msg>
+<arg>${response.json()}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-10-24T21:54:38.206461" elapsed="0.000996"/>
+</kw>
+<doc>Crear un nuevo servicio</doc>
+<status status="PASS" start="2024-10-24T21:54:34.324060" elapsed="3.883397"/>
+</test>
+<status status="FAIL" start="2024-10-24T21:54:01.139534" elapsed="37.070443"/>
+</suite>
+<statistics>
+<total>
+<stat pass="6" fail="4" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="6" fail="4" skip="0" id="s1" name="pruebasApi">pruebasApi</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
